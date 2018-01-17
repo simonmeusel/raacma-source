@@ -1,0 +1,29 @@
+i.fa.fa-play {
+  margin-left: 1.13px;
+}
+
+.controls-speed {
+  transition: width 0.3s;
+  width: 49px;
+}
+
+.controls-speed:hover {
+  transition: width 0.3s;
+  width: 200px;
+}
+
+.controls-running {
+  animation: controls-running 1s ease-in-out 0s infinite;
+}
+
+@keyframes controls-running {
+  from {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}

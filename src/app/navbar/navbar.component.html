@@ -1,0 +1,34 @@
+<div class="card">
+  <div class="card-body pb-3">
+    <div class="row">
+      <div class="col">
+        <button (click)="download()" type="button" class="btn btn-outline-primary mb-1">
+          <i class="fa fa-floppy-o" aria-hidden="true"></i>
+          Download
+        </button>
+        <button (click)="openOpenFileModal()" type="button" class="btn btn-outline-primary mb-1">
+          <i class="fa fa-folder-open" aria-hidden="true"></i>
+          Open file
+        </button>
+        <button (click)="deleteAllOrUndo()" type="button" class="btn btn-outline-danger mb-1">
+          <span *ngIf="!canUndo()">
+            <i class="fa fa-trash" aria-hidden="true"></i>
+            Delete everything
+          </span>
+          <span *ngIf="canUndo()">
+            <i class="fa fa-undo" aria-hidden="true"></i>
+            Undo (experimental)
+          </span>
+        </button>
+      </div>
+      <div class="col-auto">
+        <button type="button" class="btn btn-outline-primary mb-1">
+          <i class="fa fa-link" aria-hidden="true"></i>
+          simonmeusel.de/raacma
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<a #a class="navbar-a"></a>
