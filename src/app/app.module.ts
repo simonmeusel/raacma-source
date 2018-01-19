@@ -9,31 +9,27 @@ import { DataService } from './data.service';
 import { SimulatorService } from './simulator.service';
 
 
-import { AddStateComponent } from './instructions/add-state/add-state.component';
 import { AppComponent } from './app.component';
 import { ControlsComponent } from './controls/controls.component';
-import { EditStateComponent } from './instructions/edit-state/edit-state.component';
 import { InstructionsComponent } from './instructions/instructions.component';
 import { OpenFileComponent } from './navbar/open-file/open-file.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { TableComponent } from './table/table.component';
 
 
 eval('window.app = {}');
 
 @NgModule({
   declarations: [
-    AddStateComponent,
     AppComponent,
     ContenteditableDirective,
     ControlsComponent,
     InstructionsComponent,
-    EditStateComponent,
     NavbarComponent,
-    OpenFileComponent
+    OpenFileComponent,
+    TableComponent
   ],
   entryComponents: [
-    AddStateComponent,
-    EditStateComponent,
     OpenFileComponent
   ],
   imports: [

@@ -1,0 +1,22 @@
+<table class="table table-sm">
+  <thead>
+    <tr>
+      <th scope="col">
+        BR
+      </th>
+      <th *ngFor="let register of s.registers" scope="col" class="instructions-center">
+        {{ register.name }}
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let stage of s.timeline.stages">
+      <th scope="row">
+        {{ stage.time }}
+      </th>
+      <td *ngFor="let register of s.registers; trackBy:trackBySymbol">
+        {{ stage.registers[register] }}
+      </td>
+    </tr>
+  </tbody>
+</table>

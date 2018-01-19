@@ -23,8 +23,8 @@ export class OpenFileComponent {
     const reader = new FileReader();
 
     reader.onload = () => {
-      const json = JSON.parse(reader.result);
-      this.data.fromJson(json);
+      const text = reader.result;
+      this.data.fromText(text);
       this.activeModal.close();
     };
 

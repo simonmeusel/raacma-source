@@ -4,7 +4,33 @@
   <br>
   <app-controls></app-controls>
   <br>
-  <app-instructions></app-instructions>
+  <div class="row">
+    <div class="col-6">
+      <app-instructions></app-instructions>
+    </div>
+    <div class="col-6">
+      <app-table></app-table>
+    </div>
+  </div>
+  <br> Possible statements:
+  <br>
+  <code>Ri := k</code>
+  <br>
+  <code>Ri := Rj</code>
+  <br>
+  <code>RRi := Rj</code>
+  <br>
+  <code>Ri := RRj</code>
+  <br>
+  <code>Ri := Rj + Rk</code>
+  <br>
+  <code>Ri := Rj - Rk</code>
+  <br>
+  <code>GOTO m</code>
+  <br>
+  <code>IF Ri = 0 GOTO m</code>
+  <br>
+  <code>IF Ri > 0 GOTO m</code>
   <br>
   <hr>
   <a href="https://github.com/simonmeusel/raacma-source/issues" class="btn btn-outline-secondary mb-1">

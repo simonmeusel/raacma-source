@@ -21,11 +21,11 @@ export class NavbarComponent {
   ) { }
 
   download() {
-    const json = this.data.toJson();
+    const text = this.data.toText();
 
     const a = this.a.nativeElement;
-    a.href = window.URL.createObjectURL(new Blob([JSON.stringify(json)], { type: 'text/json' }));
-    a.download = 'turing.json';
+    a.href = window.URL.createObjectURL(new Blob([text], { type: 'text/json' }));
+    a.download = 'turing.txt';
     a.click();
   }
 

@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { SimulatorService } from '../simulator.service';
-import { State } from '../state';
 
 @Component({
   selector: 'app-instructions',

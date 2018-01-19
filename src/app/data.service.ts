@@ -29,25 +29,22 @@ export class DataService {
 
   save() {
     this.timeout = null;
-    localStorage.setItem('alan-data', JSON.stringify(this.toJson()));
+    localStorage.setItem('raacma-data', this.toText());
     this.changedForNavbar = true;
   }
 
   load() {
-    const json = JSON.parse(localStorage.getItem('alan-data'));
-    if (json) {
-      this.fromJson(json);
+    const text = localStorage.getItem('raacma-data');
+    if (text) {
+      this.fromText(text);
     }
   }
 
-  toJson() {
-    return {
-      simulator: this.s.toJson()
-    }
+  toText(): string {
+    return '';
   }
 
-  fromJson(json) {
-    this.s.fromJson(json.simulator);
-    this.s.s();
+  fromText(text) {
+
   }
 }
