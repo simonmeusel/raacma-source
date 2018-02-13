@@ -2,10 +2,15 @@
   <thead>
     <tr>
       <th scope="col">
-        BR
+        Time
+      </th>
+      <th scope="col">
+        Pointer
       </th>
       <th *ngFor="let register of s.registers" scope="col" class="instructions-center">
         {{ register.name }}
+      </th>
+      <th *ngFor="let register of maxRegistersArray()" scope="col" class="instructions-center">
       </th>
     </tr>
   </thead>
@@ -14,8 +19,11 @@
       <th scope="row">
         {{ stage.time }}
       </th>
-      <td *ngFor="let register of s.registers; trackBy:trackBySymbol">
-        {{ stage.registers[register] }}
+      <th scope="row">
+        {{ stage.pointer }}
+      </th>
+      <td *ngFor="let register of stage.registers">
+        {{ register }}
       </td>
     </tr>
   </tbody>

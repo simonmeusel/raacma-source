@@ -5,46 +5,30 @@ import { SimulatorService } from './simulator.service';
 export class DataService {
   s: SimulatorService
   /**
-   * Currenty running timeout for save
-   */
-  timeout;
-  /**
    * Indication whether changed (for navbar's delete feature)
    */
-  changedForNavbar = false;
+  public changedForNavbar = false;
+  /**
+   * Contents of program editor
+   */
+  public text = 'ARGS 0\n\n0 STOP';
 
   constructor() {
     eval('window.app.data = this');
   }
 
-  /**
-   * Preapare for save
-   */
-  p() {
-    if (this.timeout) {
-      clearTimeout(this.timeout);
-    }
-    this.timeout = setTimeout(this.save.bind(this), 500);
-  }
-
   save() {
-    this.timeout = null;
-    localStorage.setItem('raacma-data', this.toText());
+    localStorage.setItem('raacma-data', this.text);
     this.changedForNavbar = true;
   }
 
   load() {
-    const text = localStorage.getItem('raacma-data');
-    if (text) {
-      this.fromText(text);
+    if (!localStorage.hasOwnProperty('raacma-data')) {
+      return;
     }
-  }
-
-  toText(): string {
-    return '';
-  }
-
-  fromText(text) {
-
+    const text = localStorage.getItem('raacma-data');
+    if (typeof text == 'string') {
+      this.text = text;
+    }
   }
 }

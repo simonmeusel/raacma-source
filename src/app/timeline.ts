@@ -7,8 +7,4 @@ export class Timeline {
    * Mapped to the position on the timeline
    */
   stages: Stage[] = [];
-  /**
-   * Program used to generate this timeline
-   */
-  lines: string
 }

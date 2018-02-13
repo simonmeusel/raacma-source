@@ -1,12 +1,18 @@
 import { SimulatorService } from './simulator.service';
 
 export class Stage {
-  /**
-   * Position in timeline
-   */
-  time: number;
-  /**
-   * Line of program executed
-   */
-  line: string[] = [];
+  constructor(
+    /**
+     * Position in timeline
+     */
+    public time: number,
+    /**
+     * Pointer registers content
+     */
+    public pointer: number,
+    /**
+     * Contents of registers
+     */
+    public registers: number[]
+  ) { }
 }

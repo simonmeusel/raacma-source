@@ -1,3 +1,7 @@
 textarea {
   height: 200px;
 }
+
+.lines-container {
+  overflow: hidden;
+}

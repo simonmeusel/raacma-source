@@ -7,8 +7,6 @@ import { SimulatorService } from '../simulator.service';
   styleUrls: ['./controls.component.css']
 })
 export class ControlsComponent {
-  autoFix = true;
-
   constructor(
     private s: SimulatorService
   ) { }

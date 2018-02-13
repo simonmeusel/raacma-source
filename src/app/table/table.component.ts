@@ -10,4 +10,10 @@ export class TableComponent {
   constructor(
     private s: SimulatorService
   ) { }
+
+  maxRegistersArray() {
+    let array = [];
+    array.length = this.s.maxRegisters;
+    return array;
+  }
 }
