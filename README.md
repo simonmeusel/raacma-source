@@ -1,4 +1,4 @@
-# RAndom ACcess MAchine http://simonmeusel.de/raacme/
+# RAndom ACcess MAchine http://simonmeusel.de/raacma/
 
 This is a random access machine based on web technologies.
 
@@ -21,7 +21,7 @@ This is a random access machine based on web technologies.
 
 
 This project was created by Simon Meusel.
-It is licensed under [GPL-3.0](https://github.com/simonmeusel/alan-source/blob/master/LICENSE), but it uses many dependencies. You can see those and their licensing [here](https://github.com/simonmeusel/alan-source/blob/master/package.json).
+It is licensed under [GPL-3.0](https://github.com/simonmeusel/raacma-source/blob/master/LICENSE), but it uses many dependencies. You can see those and their licensing [here](https://github.com/simonmeusel/raacma-source/blob/master/package.json).
 
 ## Development
 
