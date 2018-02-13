@@ -1,9 +1,30 @@
 <div class="card">
   <div class="card-body pb-3">
-    <button (click)="showTable()" type="button" class="btn btn-primary mb-1">
-      <div class="controls-spacer-play"></div>
-      <i class="fa fa-play" aria-hidden="true"></i>
-      Show table
-    </button>
+    <div class="row">
+      <div class="col">
+        <button (click)="showTable()" type="button" class="btn btn-primary mb-1">
+          <div class="controls-spacer-play"></div>
+          <i class="fa fa-play" aria-hidden="true"></i>
+          Show table
+        </button>
+      </div>
+      <div class="col-auto pl-0">
+        <button *ngIf="s.simulationState == 'finished'" (click)="s.simulate()" type="button" class="btn btn-outline-primary mb-1">
+          <i class="fa fa-refresh" aria-hidden="true"></i>
+        </button>
+        <ng-template #errorState>
+          <div *ngFor="let error of s.simulationErrors">
+            {{ error }}
+          </div>
+        </ng-template>
+        <button *ngIf="s.simulationState == 'failed'" [ngbPopover]="errorState" placement="bottom" triggers="mouseenter:mouseleave"
+          popoverTitle="Error!" class="btn btn-danger mb-1">
+          <i class="fa fa-refresh" aria-hidden="true"></i>
+        </button>
+        <button *ngIf="s.simulationState == 'running'" type="button" class="btn btn-outline-secondary disabled mb-1">
+          <i class="fa fa-refresh controls-running" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
   </div>
 </div>

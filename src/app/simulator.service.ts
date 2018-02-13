@@ -71,6 +71,7 @@ export class SimulatorService {
     while (i <= 1000) {
       const line = this.program.instructions[pointer];
       if (!line) {
+        this.simulationState = 'failed';
         this.simulationErrors.push('Line at pointer ' + pointer + ' not found!');
         return;
       }
@@ -142,7 +143,6 @@ export class SimulatorService {
         const i = Number.parseInt(regEx.exec(line)[0]);
         regEx.exec(line)[0];
         const m = Number.parseInt(regEx.exec(line)[0]);
-        console.log(i, m)
 
         if (f(registers[i]) == 0) {
           newPointer = m - 1;
@@ -159,9 +159,11 @@ export class SimulatorService {
         }
       } else if (/^STOP$/.test(line)) {
         // n STOP
+        this.simulationState = 'finished';
         this.timeline.stages.push(new Stage(i, pointer, registers.slice()));
         return;
       } else {
+        this.simulationState = 'failed';
         this.simulationErrors.push('Line ' + pointer + ' ' + line + ' does not match any command!');
         return;
       }
@@ -172,8 +174,7 @@ export class SimulatorService {
       i++;
     }
 
-    if (i = 1000) {
-      this.simulationErrors.push('Program exceeded 10000 executions (endless loop?)!');
-    }
+    this.simulationState = 'failed';
+    this.simulationErrors.push('Program exceeded 10000 executions (endless loop?)!');
   }
 }
