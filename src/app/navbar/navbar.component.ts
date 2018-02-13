@@ -21,11 +21,11 @@ export class NavbarComponent {
   ) { }
 
   download() {
-    const text = this.data.toText();
+    const text = this.data.text;
 
     const a = this.a.nativeElement;
-    a.href = window.URL.createObjectURL(new Blob([text], { type: 'text/json' }));
-    a.download = 'turing.txt';
+    a.href = window.URL.createObjectURL(new Blob([text], { type: 'text/plain' }));
+    a.download = 'ram.txt';
     a.click();
   }
 
@@ -42,7 +42,7 @@ export class NavbarComponent {
       this.download();
       this.deleted = true;
       this.data.changedForNavbar = false;
-      this.s.fromEmpty();
+      this.data.text = '';
     }
   }
 

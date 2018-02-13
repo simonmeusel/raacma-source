@@ -23,8 +23,7 @@ export class OpenFileComponent {
     const reader = new FileReader();
 
     reader.onload = () => {
-      const text = reader.result;
-      this.data.fromText(text);
+      this.data.text = reader.result;
       this.activeModal.close();
     };
 
