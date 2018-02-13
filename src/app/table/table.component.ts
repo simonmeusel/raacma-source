@@ -13,7 +13,7 @@ export class TableComponent {
 
   maxRegistersArray() {
     let array = [];
-    array.length = this.s.maxRegisters;
+    array.length = this.s.maxRegisters + 1;
     return array;
   }
 }

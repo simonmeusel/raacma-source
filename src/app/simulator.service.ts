@@ -64,9 +64,11 @@ export class SimulatorService {
     this.timeline.stages = [];
     this.timeline.stages[0] = new Stage(0, 0, registers.slice());
 
+    const f = a => a ? a : 0;
+
     let i = 1;
     let pointer = 0;
-    while (i <= 100000) {
+    while (i <= 1000) {
       const line = this.program.instructions[pointer];
       if (!line) {
         this.simulationErrors.push('Line at pointer ' + pointer + ' not found!');
@@ -74,9 +76,89 @@ export class SimulatorService {
       }
       let newPointer = pointer;
 
-      if (/^GOTO [0-9]+$/.test(line)) {
-        newPointer = Number.parseInt(line.split(' ')[1]);
+      if (/^R[0-9]+ := [0-9]+$/.test(line)) {
+        // n Ri := k
+        const regEx = /[0-9]+/g;
+        const i = Number.parseInt(regEx.exec(line)[0]);
+        const k = Number.parseInt(regEx.exec(line)[0]);
+        registers[i] = k;
+        if (i > this.maxRegisters) {
+          this.maxRegisters = i + 1;
+        }
+      } else if (/^R[0-9]+ := R[0-9]+$/.test(line)) {
+        // n Ri := Rj
+        const regEx = /[0-9]+/g;
+        const i = Number.parseInt(regEx.exec(line)[0]);
+        const j = Number.parseInt(regEx.exec(line)[0]);
+        registers[i] = f(registers[j]);
+        if (i > this.maxRegisters) {
+          this.maxRegisters = i + 1;
+        }
+      } else if (/^RR[0-9]+ := R[0-9]+$/.test(line)) {
+        // n RRi := Rj
+        const regEx = /[0-9]+/g;
+        const i = Number.parseInt(regEx.exec(line)[0]);
+        const j = Number.parseInt(regEx.exec(line)[0]);
+        registers[registers[i]] = f(registers[j]);
+        if (i > this.maxRegisters) {
+          this.maxRegisters = i + 1;
+        }
+      } else if (/^R[0-9]+ := RR[0-9]+$/.test(line)) {
+        // n Ri := RRj
+        const regEx = /[0-9]+/g;
+        const i = Number.parseInt(regEx.exec(line)[0]);
+        const j = Number.parseInt(regEx.exec(line)[0]);
+        registers[i] = f(registers[f(registers[j])]);
+        if (i > this.maxRegisters) {
+          this.maxRegisters = i + 1;
+        }
+      } else if (/^R[0-9]+ := R[0-9]+ \+ R[0-9]+$/.test(line)) {
+        // n Ri := Rj + Rk
+        const regEx = /[0-9]+/g;
+        const i = Number.parseInt(regEx.exec(line)[0]);
+        const j = Number.parseInt(regEx.exec(line)[0]);
+        const k = Number.parseInt(regEx.exec(line)[0]);
+        registers[i] = f(registers[j]) + f(registers[k]);
+        if (i > this.maxRegisters) {
+          this.maxRegisters = i + 1;
+        }
+      } else if (/^R[0-9]+ := R[0-9]+ \- R[0-9]+$/.test(line)) {
+        // n Ri := Rj - Rk
+        const regEx = /[0-9]+/g;
+        const i = Number.parseInt(regEx.exec(line)[0]);
+        const j = Number.parseInt(regEx.exec(line)[0]);
+        const k = Number.parseInt(regEx.exec(line)[0]);
+        registers[i] = Math.max(f(registers[j]) - f(registers[k]), 0);
+        if (i > this.maxRegisters) {
+          this.maxRegisters = i + 1;
+        }
+      } else if (/^GOTO [0-9]+$/.test(line)) {
+        // n GOTO m
+        const regEx = /[0-9]+/g;
+        newPointer = Number.parseInt(regEx.exec(line)[0]) - 1;
+      } else if (/^IF R[0-9]+ = 0 GOTO [0-9]+$/.test(line)) {
+        // n IF Ri = 0 GOTO m
+        const regEx = /[0-9]+/g;
+        const i = Number.parseInt(regEx.exec(line)[0]);
+        regEx.exec(line)[0];
+        const m = Number.parseInt(regEx.exec(line)[0]);
+        console.log(i, m)
+
+        if (f(registers[i]) == 0) {
+          newPointer = m - 1;
+        }
+      } else if (/^IF R[0-9]+ > 0 GOTO [0-9]+$/.test(line)) {
+        // n IF Ri > 0 GOTO m
+        const regEx = /[0-9]+/g;
+        const i = Number.parseInt(regEx.exec(line)[0]);
+        regEx.exec(line)[0];
+        const m = Number.parseInt(regEx.exec(line)[0]);
+
+        if (f(registers[i]) > 0) {
+          newPointer = m - 1;
+        }
       } else if (/^STOP$/.test(line)) {
+        // n STOP
         this.timeline.stages.push(new Stage(i, pointer, registers.slice()));
         return;
       } else {
@@ -90,8 +172,8 @@ export class SimulatorService {
       i++;
     }
 
-    if (i = 100000) {
-      this.simulationErrors.push('Program exceeded 100000 executions (endless loop?)!');
+    if (i = 1000) {
+      this.simulationErrors.push('Program exceeded 10000 executions (endless loop?)!');
     }
   }
 }
