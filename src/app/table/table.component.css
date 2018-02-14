@@ -1,5 +1,9 @@
 table {
-  overflow: scroll;
+  overflow: scroll-y;
   table-layout: fixed;
   width: 100%;
+}
+
+th,td {
+  width: 40px;
 }
