@@ -10,7 +10,8 @@
       <th *ngFor="let register of s.registers" scope="col" class="instructions-center">
         {{ register.name }}
       </th>
-      <th *ngFor="let register of maxRegistersArray()" scope="col" class="instructions-center">
+      <th *ngFor="let register of maxRegistersArray(); index as i" scope="col" class="instructions-center">
+        R{{ i }}
       </th>
     </tr>
   </thead>

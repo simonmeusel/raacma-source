@@ -84,7 +84,7 @@ export class SimulatorService {
         const k = Number.parseInt(regEx.exec(line)[0]);
         registers[i] = k;
         if (i > this.maxRegisters) {
-          this.maxRegisters = i + 1;
+          this.maxRegisters = i;
         }
       } else if (/^R[0-9]+ := R[0-9]+$/.test(line)) {
         // n Ri := Rj
@@ -93,7 +93,7 @@ export class SimulatorService {
         const j = Number.parseInt(regEx.exec(line)[0]);
         registers[i] = f(registers[j]);
         if (i > this.maxRegisters) {
-          this.maxRegisters = i + 1;
+          this.maxRegisters = i;
         }
       } else if (/^RR[0-9]+ := R[0-9]+$/.test(line)) {
         // n RRi := Rj
@@ -102,7 +102,7 @@ export class SimulatorService {
         const j = Number.parseInt(regEx.exec(line)[0]);
         registers[registers[i]] = f(registers[j]);
         if (i > this.maxRegisters) {
-          this.maxRegisters = i + 1;
+          this.maxRegisters = i;
         }
       } else if (/^R[0-9]+ := RR[0-9]+$/.test(line)) {
         // n Ri := RRj
@@ -111,7 +111,7 @@ export class SimulatorService {
         const j = Number.parseInt(regEx.exec(line)[0]);
         registers[i] = f(registers[f(registers[j])]);
         if (i > this.maxRegisters) {
-          this.maxRegisters = i + 1;
+          this.maxRegisters = i;
         }
       } else if (/^R[0-9]+ := R[0-9]+ \+ R[0-9]+$/.test(line)) {
         // n Ri := Rj + Rk
@@ -121,7 +121,7 @@ export class SimulatorService {
         const k = Number.parseInt(regEx.exec(line)[0]);
         registers[i] = f(registers[j]) + f(registers[k]);
         if (i > this.maxRegisters) {
-          this.maxRegisters = i + 1;
+          this.maxRegisters = i;
         }
       } else if (/^R[0-9]+ := R[0-9]+ \- R[0-9]+$/.test(line)) {
         // n Ri := Rj - Rk
@@ -131,7 +131,7 @@ export class SimulatorService {
         const k = Number.parseInt(regEx.exec(line)[0]);
         registers[i] = Math.max(f(registers[j]) - f(registers[k]), 0);
         if (i > this.maxRegisters) {
-          this.maxRegisters = i + 1;
+          this.maxRegisters = i;
         }
       } else if (/^GOTO [0-9]+$/.test(line)) {
         // n GOTO m
