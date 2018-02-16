@@ -42,7 +42,7 @@ export class NavbarComponent {
       this.download();
       this.deleted = true;
       this.data.changedForNavbar = false;
-      this.data.text = '';
+      this.data.text = this.data.defaultText;
     }
   }
 

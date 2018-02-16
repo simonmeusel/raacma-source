@@ -9,9 +9,13 @@ export class DataService {
    */
   public changedForNavbar = false;
   /**
+   * Default contents of program editor
+   */
+  public defaultText = 'ARGS 0\n\n0 STOP';
+  /**
    * Contents of program editor
    */
-  public text = 'ARGS 0\n\n0 STOP';
+  public text = this.defaultText;
 
   constructor() {
     eval('window.app.data = this');
