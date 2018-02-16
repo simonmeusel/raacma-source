@@ -58,7 +58,7 @@ export class SimulatorService {
   simulate() {
     this.simulationState = 'running';
     this.simulationErrors = [];
-    let registers = this.program.args;
+    let registers = this.program.args.slice();
     this.maxRegisters = registers.length;
 
     this.timeline.stages = [];
