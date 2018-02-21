@@ -36,7 +36,7 @@ export class InstructionsComponent {
       }
     }
 
-    this.fixLines();
+    this.fixLines(!!event);
 
     this.s.s();
     this.data.save();
@@ -45,7 +45,7 @@ export class InstructionsComponent {
     this.ta.selectionEnd = selectionEnd;
   }
 
-  fixLines() {
+  fixLines(focused: boolean) {
     let instructions: string[] = [];
     let args: number[] = [];
     let lines: string[] = this.ta.value.split('\n');
@@ -55,10 +55,20 @@ export class InstructionsComponent {
 
     for (let i = 0; i < lines.length; i++) {
       let line = lines[i];
+      if (!focused) {
+        line = line
+          // Remove whitespace at beginning and end
+          .trim()
+          // Compress multiple whitespaces
+          .replace(/  +/g, ' ');
+      }
+      line = line
+        // Convert to uppercase
+        .toUpperCase();
 
       if (regExp.test(line)) {
         instructions[lineNumber] = line.replace(regExp, '');
-        lines[i] = line.replace(regExp, lineNumber + ' ')
+        line = line.replace(regExp, lineNumber + ' ')
 
         lineNumber++;
       } else if (line.startsWith('ARGS')) {
@@ -66,6 +76,8 @@ export class InstructionsComponent {
         argStrings.shift();
         args = argStrings.map(arg => Number.parseInt(arg));
       }
+
+      lines[i] = line;
     }
 
     this.ta.value = lines.join('\n');
