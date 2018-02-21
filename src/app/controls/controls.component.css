@@ -2,6 +2,10 @@ i.fa.fa-play {
   margin-left: 1.13px;
 }
 
+.max-time {
+  width: 200px;
+}
+
 .controls-speed {
   transition: width 0.3s;
   width: 49px;

@@ -1,7 +1,9 @@
 <div class="card">
   <div class="card-body pb-3">
     <div class="row">
-      <div class="col"></div>
+      <div class="col">
+        <input class="form-control max-time" (change)="s.s()" [(ngModel)]="s.maxTime" type="number" title="Max time for simulation">
+      </div>
       <div class="col-auto pl-0">
         <button *ngIf="s.simulationState == 'finished'" (click)="s.simulate()" type="button" class="btn btn-outline-primary mb-1">
           <i class="fa fa-refresh" aria-hidden="true"></i>

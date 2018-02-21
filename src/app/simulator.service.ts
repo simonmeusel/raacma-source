@@ -32,6 +32,10 @@ export class SimulatorService {
    * Biggest index of register
    */
   maxRegisters: number = 0;
+  /**
+   * Time after which simulation will be cancelled
+   */
+  maxTime: number = 1000;
 
   constructor(
     private data: DataService
@@ -68,7 +72,7 @@ export class SimulatorService {
 
     let i = 1;
     let pointer = 0;
-    while (i <= 1000) {
+    while (i <= this.maxTime) {
       const line = this.program.instructions[pointer];
       if (!line) {
         this.simulationState = 'failed';
@@ -175,6 +179,6 @@ export class SimulatorService {
     }
 
     this.simulationState = 'failed';
-    this.simulationErrors.push('Program exceeded 10000 executions (endless loop?)!');
+    this.simulationErrors.push('Program exceeded ' + this.maxTime + ' executions!');
   }
 }
