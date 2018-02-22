@@ -60,7 +60,15 @@ export class InstructionsComponent {
           // Remove whitespace at beginning and end
           .trim()
           // Compress multiple whitespaces
-          .replace(/  +/g, ' ');
+          .replace(/  +/g, ' ')
+          .replace(/([^ ]):=/, '$1 :=')
+          .replace(/:=([^ ])/g, ':= $1')
+          .replace(/([^ ])\+/g, '$1 +')
+          .replace(/\+([^ ])/g, '+ $1')
+          .replace(/([^ ])\-/g, '$1 -')
+          .replace(/\-([^ ])/g, '- $1')
+          .replace(/([^: ])=/g, '$1 =')
+          .replace(/ =([^ ])/g, ' = $1');
       }
       line = line
         // Convert to uppercase
