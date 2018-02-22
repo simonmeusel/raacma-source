@@ -1,1 +1,25 @@
 <textarea #program (change)="onChange()" (keyup)="onChange($event)" [(ngModel)]="data.text" class="form-control"></textarea>
+
+<br> Possible statements:
+<br>
+<code>ARGS ...</code>
+<br>
+<code>n Ri := k</code>
+<br>
+<code>n Ri := Rj</code>
+<br>
+<code>n RRi := Rj</code>
+<br>
+<code>n Ri := RRj</code>
+<br>
+<code>n Ri := Rj + Rk</code>
+<br>
+<code>n Ri := Rj - Rk</code>
+<br>
+<code>n GOTO m</code>
+<br>
+<code>n IF Ri = 0 GOTO m</code>
+<br>
+<code>n IF Ri > 0 GOTO m</code>
+<br>
+<code>n STOP</code>
