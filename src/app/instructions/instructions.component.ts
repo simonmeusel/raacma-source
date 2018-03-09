@@ -59,8 +59,10 @@ export class InstructionsComponent {
         line = line
           // Remove whitespace at beginning and end
           .trim()
-          // Compress multiple whitespaces
+          // Compress multiple spaces
           .replace(/  +/g, ' ')
+          // Add missing whitespace
+          .replace(/^#([^ ])/g, '# $1')
           .replace(/([^ ]):=/, '$1 :=')
           .replace(/:=([^ ])/g, ':= $1')
           .replace(/([^ ])\+/g, '$1 +')
